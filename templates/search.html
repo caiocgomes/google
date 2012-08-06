@@ -1,0 +1,11 @@
+<form action="/" method="post">
+<input type="text" name="term" size="30"> 
+<br>
+<input type="submit" value="Search"><br>
+
+</form><hr>
+{% if result %}
+	{% for res in result %}
+	<li>{{ res }}</li>
+	{% endfor %}
+{% endif %}
