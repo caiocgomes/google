@@ -20,7 +20,9 @@ import weakref
 import threading
 import Queue
 import searcher
-
+import urllib2
+import ast
+engine = searcher.getPOIengine()
 __version__ = '1.0.3'
 
 # Default headers for HTTP requests.
@@ -366,8 +368,19 @@ def Phonetize(word):
 
 def SearchTest(word,n):
   
-  return searcher.engine.orderedQuery(word, n)
-  
+  return engine.orderedQuery(word, n)
+  #return searcher.engine.debugSiteQuery(word, n)
+def SearchSolr(searchTerm,n):
+  import urllib
+  searchTerm = urllib.quote(searchTerm)
+  print searchTerm
+  url = "http://192.168.1.30:8088/content/local/select/?q="+ searchTerm + "&qt=matchName&rows="+str(n) +"&wt=python&fl=district,city,street,name"
+  print url
+
+  solrPoster = urllib2.urlopen(url)
+  dic = ast.literal_eval(solrPoster.read())
+  print dic
+  return dic['response']['docs']
 #caio = 'teste'
 # --------------------------------------------------------------------
 # Unit tests

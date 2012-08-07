@@ -1,11 +1,26 @@
 <form action="/" method="post">
-<input type="text" name="term" size="30"> 
+O que:<input type="text" name="term" size="30">  Onde: <input type="text" name="where" size="30">
 <br>
 <input type="submit" value="Search"><br>
 
 </form><hr>
+<table width = "100%" cellpadding = "0" cellspacing = "10" border = "0">
+<tr>
+<td width = "50%" valign = "top">
 {% if result %}
 	{% for res in result %}
+	<li>{{ res.2 }}</li>
+	{% endfor %}
+{% endif %} 
+
+</td>
+<td width = "50%" valign= "top">
+{% if result2 %}
+	{% for res in result2 %}
 	<li>{{ res }}</li>
 	{% endfor %}
 {% endif %}
+</td>
+</tr>
+</table>
+

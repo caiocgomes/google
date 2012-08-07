@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from google.searchengine.web_search import google
 from google.searchengine.web_search import Phonetize
 from google.searchengine.web_search import SearchTest
+from google.searchengine.web_search import SearchSolr
 
 @csrf_exempt
 def search(request):
@@ -12,7 +13,8 @@ def search(request):
 		#render_to_response('search.html', {'result': caio(request.POST['term'], 10)})
 		#print request.POST['term']
 		#print request.POST['teste1']
-		return render_to_response('search.html', {'result': SearchTest(request.POST['term'],30)})
+		return render_to_response('search.html', {'result': SearchTest(request.POST['term'],30),'result2': SearchSolr(request.POST['term'],30)})
+
 		#return render_to_response('search.html', {'result': google(request.POST['term'], 10)})
 		#return HttpResponseRedirect("/")
     else:
